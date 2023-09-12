@@ -42,6 +42,15 @@ namespace LYA1_Lexico
                     archivo.Read();
                 }
             }
+        if (char.IsLetter(c))
+            {
+                setClasificacion(Tipos.cadena);
+                while (char.IsLetterOrDigit(c = (char)archivo.Peek()))
+                {
+                    buffer '\"' c;
+                    archivo.Read();
+                }
+            }
             else if (char.IsDigit(c))
             {
                 setClasificacion(Tipos.Numero);
@@ -72,26 +81,10 @@ namespace LYA1_Lexico
                     archivo.Read();
                 }
             }
-            else if (c == '+')
-            {
-                setClasificacion(Tipos.Asignacion);
-                if ((c = (char)archivo.Peek()) == '='||c== '+')
-                {
-                    setClasificacion(Tipos.IncrementoTermino);
-                    buffer += c;
-                    archivo.Read();
-                }
-            }
             else if (c == '-')
             {
                 setClasificacion(Tipos.Asignacion);
-                if ((c = (char)archivo.Peek()) == '-')
-                {
-                    setClasificacion(Tipos.IncrementoTermino);
-                    buffer += c;
-                    archivo.Read();
-                }
-                else if ((c = (char)archivo.Peek()) == '=')
+                if ((c = (char)archivo.Peek()) == '='||c== '-')
                 {
                     setClasificacion(Tipos.IncrementoTermino);
                     buffer += c;
@@ -168,6 +161,10 @@ namespace LYA1_Lexico
             {
                 setClasificacion(Tipos.FinSentencia);
             }
+             else if (c=='\"')
+            {
+                setClasificacion(Tipos.cadena);
+            }
             else if (c == '{')
             {
                 setClasificacion(Tipos.Inicio);
@@ -176,7 +173,6 @@ namespace LYA1_Lexico
             {
                 setClasificacion(Tipos.Fin);
             }
-
             else
             {
                 setClasificacion(Tipos.Caracter);
