@@ -14,6 +14,7 @@
         +-+-----
         %%//**
         +++---#
+        1
         radioDeLaCircunferencia=45;
 }
 
